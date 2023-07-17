@@ -28,4 +28,40 @@ def check_string(st):
                     return True
         if len(st)>0:
             check_string(st)
-        
+
+
+
+# // Example test:   'aaBabcDaA'
+#         // WRONG ANSWER (got D expected B)
+#         //
+#         // Example test:   'Codility'
+#         // WRONG ANSWER (got C expected NO)
+#         //
+#         // Example test:   'WeTestCodErs'
+#         // WRONG ANSWER (got W expected T)
+
+def solution(S):
+    occ = {}
+    for ii in S.lower():
+        occ[ii] = 1 if ii not in occ else occ[ii] + 1
+
+    print(occ)
+    newS = ''
+    for ii in occ:
+        if occ[ii]>1:
+            newS+=ii
+
+    largS = 'NO'
+    if len(newS)>1:
+        largNum = 0
+        for ii in newS:
+            if ord(ii) > largNum:
+                largS = ii
+                largNum = ord(ii)
+
+    return largS.upper()
+
+
+solution('aaBabcDaA')  # expected B
+solution('Codility') # expected NO
+solution('WeTestCodErs')  # expected T
